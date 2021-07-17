@@ -5,6 +5,5 @@ echo '<pre>';
 $service = new Services_Contactually(
             array('email' => $email, 'password' => $password)
         );
-print_r($service);
-$contacts = $service->getContacts();
-print_r($contacts);
+$results = $service->contacts();
+print_r($results);
