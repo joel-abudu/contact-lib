@@ -57,9 +57,9 @@ curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
             $target_uri = "https:
             $myObject = $this->execute($target_uri, $arguments);
             $classname = 'Services_Contactually_'.$this->sub_resources[$name];
-            $newObject = new $classname();
             $dataSet = $myObject->$name;
             foreach($dataSet as $key => $values) {
+                $newObject = new $classname();
                 $dataSet[$key] = $newObject->bind($values);
             }
             $myObject->$name = $dataSet;
