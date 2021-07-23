@@ -31,31 +31,47 @@ class Services_Contactually
             $params["user[$param]"] = $value;
         }
         $auth_url = 'https:
-        $this->execute($auth_url, $params);
+        $this->_post($auth_url, $params);
     }
-    public function execute($uri, $params = array())
+    protected function _post($uri, $params = array())
     {
-        $fields = '';
-        foreach($params as $param => $value) {
-            $fields .= "&user[$param]=".urlencode($value);
-        }
+        $curl_opts = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL => $uri,
+            CURLOPT_POST => count($params),
+            CURLOPT_POSTFIELDS => $params,
+            CURLOPT_COOKIEJAR => $this->cookie_path,
+            CURLOPT_COOKIEFILE => $this->cookie_path, 
+        );
+        return $this->_execute($curl_opts);
+    }
+    protected function _get($uri, $params = array())
+    {
+        $uri .= '?'.http_build_query($params);
+        $curl_opts = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL => $uri,
+            CURLOPT_COOKIEFILE => $this->cookie_path,
+        );
+        return $this->_execute($curl_opts);
+    }
+    protected function _execute($curl_params = array())
+    {
         $connection = curl_init();
-        curl_setopt($connection, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($connection,CURLOPT_URL, $uri);
-        curl_setopt($connection,CURLOPT_POST, count($params));
-        curl_setopt($connection, CURLOPT_COOKIEJAR, $this->cookie_path);
-        curl_setopt($connection, CURLOPT_COOKIEFILE, $this->cookie_path); 
+        foreach($curl_params as $option => $value) {
+            curl_setopt($connection, $option, $value);
+        }
 curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
         $response = curl_exec($connection);
-        $status = curl_getinfo($connection, CURLINFO_HTTP_CODE);
+        $this->status = curl_getinfo($connection, CURLINFO_HTTP_CODE);
         curl_close($connection);
-        return json_decode($response);        
+        return json_decode($response);
     }
     public function __call($name, $arguments)
     {
         if(isset($this->sub_resources[$name])) {
             $target_uri = "https:
-            $myObject = $this->execute($target_uri, $arguments);
+            $myObject = $this->_get($target_uri, $arguments[0]);
             $classname = 'Services_Contactually_'.$this->sub_resources[$name];
             $dataSet = $myObject->$name;
             foreach($dataSet as $key => $values) {
