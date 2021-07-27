@@ -5,5 +5,5 @@ echo '<pre>';
 $service = new Services_Contactually(
             array('email' => $email, 'password' => $password)
         );
-$results = $service->contacts();
+$results = $service->contacts(array('limit' => 10));
 print_r($results);

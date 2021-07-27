@@ -10,7 +10,6 @@ function Services_Contactually_autoload($className) {
 spl_autoload_register('Services_Contactually_autoload');
 class Services_Contactually
 {
-    protected $connection = null;
     protected $cookie_path = '';
     protected $sub_resources = array();
     public function __construct($params)
