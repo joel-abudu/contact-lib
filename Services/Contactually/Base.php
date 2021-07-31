@@ -25,6 +25,12 @@ abstract class Services_Contactually_Base
                 }
                 return $dataSet;
                 break;
+            case 'show':
+                $id = $arguments[0];
+                $this->show = str_replace('<id>', $id, $this->show);
+                $myObject = $this->service->get("{$this->show}", $id);
+                return $this->bind($myObject);
+                break;
             default:
                 echo "nope, didn't work";
                 throw new Exception("Method not found", 405);
