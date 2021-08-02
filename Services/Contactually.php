@@ -30,10 +30,16 @@ class Services_Contactually
         }
         $auth_url = 'https:
         $this->post($auth_url, $params);
-        foreach($this->sub_resources as $obj => $class) {
+    }
+    public function __get($name)
+    {
+        $this->$name = null;
+        if (isset($this->sub_resources[$name])) {
+            $class = $this->sub_resources[$name];
             $classname = 'Services_Contactually_'.$class;
-            $this->$obj = new $classname($this);
+            $this->$name = new $classname($this);
         }
+        return $this->$name;
     }
     public function post($uri, $params = array())
     {
