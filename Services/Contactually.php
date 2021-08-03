@@ -55,7 +55,7 @@ class Services_Contactually
     }
     public function get($uri, $params = array())
     {
-        $uri .= '?'.http_build_query($params);
+        $uri .= (count($params)) ? '?'.http_build_query($params) : '';
         $curl_opts = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => $uri,
