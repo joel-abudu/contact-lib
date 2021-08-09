@@ -41,4 +41,7 @@ $property_name = ('followups' == $property_name) ? 'today' : $property_name;
         $myObject = $this->service->get("{$this->show}", array('id' => $id));
         return $this->bind($myObject);
     }
+    public function create($params = array())
+    {
+    }
 }
