@@ -42,12 +42,12 @@ class Services_Contactually
         }
         return $this->$name;
     }
-    public function post($uri, $params = array())
+    public function post($uri, $params)
     {
         $curl_opts = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => $uri,
-            CURLOPT_POST => count($params),
+            CURLOPT_POST => 1,
             CURLOPT_POSTFIELDS => $params,
             CURLOPT_COOKIEJAR => $this->cookie_path,
             CURLOPT_COOKIEFILE => $this->cookie_path, 
