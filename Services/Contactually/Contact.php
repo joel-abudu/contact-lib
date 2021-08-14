@@ -1,7 +1,8 @@
 <?php
 class Services_Contactually_Contact extends Services_Contactually_Base
 {
-    protected $name  = 'contacts';
+    protected $name     = 'contact';
+    protected $resource = 'contacts';
     public $id              = null;
     public $first_name      = '';
     public $last_name       = '';
