@@ -2,8 +2,6 @@
 abstract class Services_Contactually_Base
 {
     protected $service = null;
-    protected $index = 'https:
-    protected $show  = 'https:
     public function __construct(Services_Contactually $service)
     {
         $this->service = $service;
@@ -25,7 +23,7 @@ abstract class Services_Contactually_Base
     }
     public function index($params = array())
     {
-        $this->index = str_replace('<resource>', $this->name, $this->index);
+        $myObject = $this->service->get($this->index, $params);
 $property_name = $this->name;
 $property_name = ('buckets' == $property_name) ? 'user_buckets' : $property_name;
 $property_name = ('contact_histories' == $property_name) ? 'email_histories' : $property_name;

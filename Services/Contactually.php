@@ -1,7 +1,6 @@
 <?php
 function Services_Contactually_autoload($className) {
-    $library_name = 'Services_Contactually';
-    if (substr($className, 0, strlen($library_name)) != $library_name) {
+    if (substr($className, 0, 21) != 'Services_Contactually') {
         return false;
     }
     $file = str_replace('_', '/', $className);
@@ -42,12 +41,12 @@ class Services_Contactually
         }
         return $this->$name;
     }
-    public function post($uri, $params)
+    public function post($uri, $params = array())
     {
         $curl_opts = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => $uri,
-            CURLOPT_POST => 1,
+            CURLOPT_POST => count($params),
             CURLOPT_POSTFIELDS => $params,
             CURLOPT_COOKIEJAR => $this->cookie_path,
             CURLOPT_COOKIEFILE => $this->cookie_path, 

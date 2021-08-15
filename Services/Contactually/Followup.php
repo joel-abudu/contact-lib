@@ -1,7 +1,7 @@
 <?php
 class Services_Contactually_Followup extends Services_Contactually_Base
 {
-    protected $name     = 'followup';
-    protected $resource = 'followups';
+    protected $name  = 'followups';
+    protected $index = 'https:
     protected $show  = 'https:
 }

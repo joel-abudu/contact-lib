@@ -1,6 +1,7 @@
 <?php
 class Services_Contactually_Bucket extends Services_Contactually_Base
 {
-    protected $name     = 'bucket';
-    protected $resource = 'buckets';
+    protected $name  = 'buckets';
+    protected $index = 'https:
+    protected $show  = 'https:
 }
