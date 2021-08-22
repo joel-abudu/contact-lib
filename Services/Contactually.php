@@ -24,9 +24,14 @@ class Services_Contactually
     public function __construct($params)
     {
         $this->cookie_path = getcwd() . '/cookie.txt';
-        foreach($params as $param => $value) {
-            unset($params[$param]);
-            $params["user[$param]"] = $value;
+        if (isset($params['apikey'])) {
+        } elseif (isset($params['email']) && isset($params['password'])) {
+            foreach($params as $param => $value) {
+                unset($params[$param]);
+                $params["user[$param]"] = $value;
+            }
+        } else {
+            throw new Services_Contactually_AuthException("To authenticate, you must include either an API Key or an email and password");
         }
         $auth_url = 'https:
         $this->post($auth_url, $params);
