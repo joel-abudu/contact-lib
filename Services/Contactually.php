@@ -47,7 +47,7 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     {
         $auth_url = 'https:
         $success = array(200 => 'OK', 201 => 'Created', 202 => 'Accepted');
-        $this->_post($auth_url, $params);
+        $this->post($auth_url, $params);
         if (!isset($success[$this->status])) {
             throw new Services_Contactually_AuthException("Authentication failed - " . $this->_obj->error);
         }

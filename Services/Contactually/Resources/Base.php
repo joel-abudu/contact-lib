@@ -3,7 +3,7 @@ abstract class Services_Contactually_Resources_Base
 {
     const USER_AGENT = 'contactually-php/0.0.1';
     protected $cookie_path = '';
-    protected function _get($uri, $params = array())
+    public function get($uri, $params = array())
     {
         $uri .= (count($params)) ? '?'.http_build_query($params) : '';
         $curl_opts = array(
@@ -13,7 +13,7 @@ abstract class Services_Contactually_Resources_Base
         );
         return $this->_execute($curl_opts);
     }
-    protected function _post($uri, $params = array())
+    public function post($uri, $params = array())
     {
         $curl_opts = array(
             CURLOPT_RETURNTRANSFER => true,
