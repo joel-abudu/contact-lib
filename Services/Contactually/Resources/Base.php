@@ -1,7 +1,6 @@
 <?php
 abstract class Services_Contactually_Resources_Base
 {
-    const USER_AGENT = 'contactually-php/0.0.1';
     protected $cookie_path = '';
     public function get($uri, $params = array())
     {
@@ -33,7 +32,6 @@ abstract class Services_Contactually_Resources_Base
         }
 curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
         $this->_json = curl_exec($connection);
-        $this->_obj  = json_decode($this->_json);
         $this->status = curl_getinfo($connection, CURLINFO_HTTP_CODE);
         curl_close($connection);
         return $this;

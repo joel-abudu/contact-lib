@@ -10,6 +10,7 @@ function Services_Contactually_autoload($className) {
 spl_autoload_register('Services_Contactually_autoload');
 class Services_Contactually extends Services_Contactually_Resources_Base
 {
+    const USER_AGENT = 'contactually-php/0.0.1';
     protected $resources = array(
                     'accounts' => 'Account',
                     'buckets' => 'Bucket',
