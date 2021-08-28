@@ -12,14 +12,14 @@ class Services_Contactually extends Services_Contactually_Resources_Base
 {
     const USER_AGENT = 'contactually-php/0.0.1';
     protected $resources = array(
-                    'accounts' => 'Account',
-                    'buckets' => 'Bucket',
-                    'contact_histories' => 'ContactHistory',
-                    'contacts' => 'Contact',
-                    'followups' => 'Followup',
-                    'notes' => 'Note',
-                    'tasks' => 'Task',
-                    'users' => 'User'
+                    'accounts' => 'Accounts',
+                    'buckets' => 'Buckets',
+                    'contact_histories' => 'ContactHistories',
+                    'contacts' => 'Contacts',
+                    'followups' => 'Followups',
+                    'notes' => 'Notes',
+                    'tasks' => 'Tasks',
+                    'users' => 'Users'
                 );
     public function __construct($params)
     {
@@ -39,7 +39,7 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     {
         $object = null;
         if (isset($this->resources[$name])) {
-            $classname = 'Services_Contactually_'.ucwords($name);
+            $classname = 'Services_Contactually_'.$this->resources[$name];
             $object = new $classname($this);
         }
         return $object;
