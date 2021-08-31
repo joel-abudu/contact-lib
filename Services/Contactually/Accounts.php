@@ -5,16 +5,18 @@ class Services_Contactually_Accounts extends Services_Contactually_Resources_Lis
     protected $_index_uri = 'https:
     public function index()
     {
-        $client = $this->client->get($this->_index_uri);
-        $this->_obj = json_decode($client->_json);
-        $this->count = $this->_obj->count;
+        $json = $this->client->get($this->_index_uri);
+        $object = json_decode($json);
+        $this->_json = $json;
+        $this->_obj  = $object->accounts;
+        $this->count = $object->count;
         return $this;
     }
     public function getObject($index = 0)
     {
         $params = array();
-        if (isset($this->_obj->accounts[$index])) {
-            $params = $this->_obj->accounts[$index];
+        if (isset($this->_obj[$index])) {
+            $params = $this->_obj[$index];
         }
         $item = new Services_Contactually_Account($this->client);
         return $item->bind($params);

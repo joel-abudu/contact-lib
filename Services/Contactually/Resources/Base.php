@@ -31,9 +31,9 @@ abstract class Services_Contactually_Resources_Base
             curl_setopt($connection, $option, $value);
         }
 curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
-        $this->_json = curl_exec($connection);
+        $json = curl_exec($connection);
         $this->status = curl_getinfo($connection, CURLINFO_HTTP_CODE);
         curl_close($connection);
-        return $this;
+        return $json;
     }
 }
