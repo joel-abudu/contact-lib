@@ -1,5 +1,8 @@
 <?php
 class Services_Contactually_User extends Services_Contactually_Base
 {
-    protected $show  = 'https:
+    public function show()
+    {
+        throw new Services_Contactually_Exception_NotImplemented("This method is not implemented");
+    }
 }
