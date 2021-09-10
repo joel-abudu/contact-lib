@@ -1,10 +1,10 @@
 <?php
 abstract class Services_Contactually_Base
 {
-    protected $service = null;
-    public function __construct(Services_Contactually $service)
+    protected $client = null;
+    public function __construct(Services_Contactually $client)
     {
-        $this->service = $service;
+        $this->client = $client;
     }
     public function bind($properties)
     {
@@ -13,18 +13,10 @@ abstract class Services_Contactually_Base
         }
         return $this;
     }
-    public function __call($name, $arguments)
-    {
-        switch($name) {
-            default:
-                echo "nope, didn't work";
-                throw new Exception("Method not found", 405);
-        }
-    }
     public function show($id = 0)
     {
         $this->show = str_replace('<id>', $id, $this->_show_uri);
-        $json = $this->service->get("{$this->show}", array('id' => $id));
+        $json = $this->client->get("{$this->show}", array('id' => $id));
         return $this->bind(json_decode($json, true));
     }
 }
