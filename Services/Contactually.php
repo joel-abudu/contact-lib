@@ -1,6 +1,7 @@
 <?php
 function Services_Contactually_autoload($className) {
-    if (substr($className, 0, 21) != 'Services_Contactually') {
+    $library_name = 'Services_Contactually';
+    if (substr($className, 0, strlen($library_name)) != $library_name) {
         return false;
     }
     $file = str_replace('_', '/', $className);
