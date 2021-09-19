@@ -32,7 +32,7 @@ class Services_Contactually extends Services_Contactually_Resources_Base
                 $params["user[$param]"] = $value;
             }
         } else {
-            throw new Services_Contactually_Exception_Authentication(
+            throw new Services_Contactually_Exceptions_Authentication(
                     "To authenticate, you must include either an API Key or an email and password");
         }
         $this->_authenticate($params);
@@ -52,8 +52,8 @@ class Services_Contactually extends Services_Contactually_Resources_Base
         $success = array(200 => 'OK', 201 => 'Created', 202 => 'Accepted');
         $this->post($auth_url, $params);
         if (!isset($success[$this->status])) {
-            throw new Services_Contactually_Exception_Authentication(
-                    "Authentication failed - " . $this->_obj->error);
+            throw new Services_Contactually_Exceptions_Authentication(
+                    "Authentication failed");
         }
     }
 }
