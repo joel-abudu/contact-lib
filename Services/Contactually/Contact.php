@@ -15,4 +15,14 @@ class Services_Contactually_Contact extends Services_Contactually_Base
     public $address = '';
     public $phone = '';
     protected $_show_uri  = 'https:
+    protected $_create_uri = 'https:
+    public function create(array $params)
+    {
+        $contact = array();
+        foreach($params as $key => $value) {
+            $contact["contact[$key]"] = $value;
+        }
+        $this->client->post($this->_create_uri, $contact);
+        return (201 == $this->client->status) ? true : false;
+    }
 }
