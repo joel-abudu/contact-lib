@@ -15,4 +15,8 @@ class Services_Contactually_Account extends Services_Contactually_Base
                 "This method is not implemented as the uri *looks* like it's wrong.."
                 );
     }
+    public function create(array $params)
+    {
+        throw new Services_Contactually_Exception_NotImplemented("This method is not implemented");
+    }
 }

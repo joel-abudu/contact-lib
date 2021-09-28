@@ -10,14 +10,6 @@ class Services_Contactually_Bucket extends Services_Contactually_Base
     public $num_days_to_followup = '';
     public $num_days_to_respond = '';
     protected $_show_uri = 'https:
+    protected $_resource = 'bucket';
     protected $_create_uri = 'https:
-    public function create(array $params)
-    {
-        $bucket = array();
-        foreach($params as $key => $value) {
-            $bucket["bucket[$key]"] = $value;
-        }
-        $this->client->post($this->_create_uri, $bucket);
-        return (201 == $this->client->status) ? true : false;
-    }
 }
