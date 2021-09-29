@@ -12,6 +12,19 @@ abstract class Services_Contactually_Resources_Base
         );
         return $this->_execute($curl_opts);
     }
+    public function delete($uri, $params = array())
+    {
+        $curl_opts = array(
+            CURLOPT_CUSTOMREQUEST => 'DELETE',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL => $uri,
+            CURLOPT_POST => count($params),
+            CURLOPT_POSTFIELDS => $params,
+            CURLOPT_COOKIEJAR => $this->cookie_path,
+            CURLOPT_COOKIEFILE => $this->cookie_path, 
+        );
+        return $this->_execute($curl_opts);
+    }
     public function post($uri, $params = array())
     {
         $curl_opts = array(
