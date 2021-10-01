@@ -28,4 +28,10 @@ abstract class Services_Contactually_Base
         $this->client->post($this->_create_uri, $properties);
         return (201 == $this->client->status) ? true : false;
     }
+    public function delete($id = 0)
+    {
+        $this->delete = str_replace('<id>', $id, $this->_delete_uri);
+        $json = $this->client->delete("{$this->delete}", array('id' => $id));
+        return (200 == $this->client->status) ? true : false;
+    }
 }
