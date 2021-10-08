@@ -2,6 +2,7 @@
 abstract class Services_Contactually_Base
 {
     protected $client = null;
+    protected $_result = null;
     public function __construct(Services_Contactually $client)
     {
         $this->client = $client;
@@ -26,7 +27,8 @@ abstract class Services_Contactually_Base
             $properties[$this->_resource . "[$key]"] = $value;
         }
         $this->client->post($this->_create_uri, $properties);
-        return (201 == $this->client->status) ? true : false;
+        $successCodes = array(200, 201);
+        return (in_array($this->client->status, $successCodes)) ? true : false;
     }
     public function delete($id = 0)
     {
