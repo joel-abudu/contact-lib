@@ -4,5 +4,7 @@ include_once '../Services/Contactually.php';
 $client = new Services_Contactually(
             array('email' => $email, 'password' => $password)
         );
+echo $client->response_code;
+unset($client);
 $client = new Services_Contactually(array('apikey' => $apiKey));
-print_r($client);
+echo $client->response_code;

@@ -12,6 +12,10 @@ spl_autoload_register('Services_Contactually_autoload');
 class Services_Contactually extends Services_Contactually_Resources_Base
 {
     const USER_AGENT = 'contactually-php/0.1.0';
+    protected $_successCodes = array(200 => 'OK', 201 => 'Created', 202 => 'Accepted');
+    public $response_body = null;
+    public $response_code = null;
+    public $response_json = null;
     protected $resources = array(
                     'accounts' => 'Accounts',
                     'buckets' => 'Buckets',
@@ -49,12 +53,12 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     protected function _authenticate($params)
     {
         $auth_url = 'https:
-        $success = array(200 => 'OK', 201 => 'Created', 202 => 'Accepted');
         $this->post($auth_url, $params);
-        if (!isset($success[$this->status])) {
+        if (!isset($this->_successCodes[$this->response_code])) {
             throw new Services_Contactually_Exceptions_Authentication(
                     "Authentication failed");
         }
+        return true;
     }
     public function get($uri, $params = array())
     {
