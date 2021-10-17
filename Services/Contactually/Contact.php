@@ -4,6 +4,7 @@ class Services_Contactually_Contact extends Services_Contactually_Resources_Base
     public $id = '';
     public $first_name = '';
     public $last_name = '';
+    public $email = '';
     public $title = '';
     public $company = '';
     public $visible = '';
@@ -12,17 +13,12 @@ class Services_Contactually_Contact extends Services_Contactually_Resources_Base
     public $last_contacted = '';
     public $hits = '';
     public $user_bucket_id = '';
-    public $address = '';
-    public $phone = '';
     protected $_show_uri  = 'https:
+    protected $_resource = 'contact';
     protected $_create_uri = 'https:
     protected $_delete_uri = 'https:
     protected $_bucket_uri = 'https:
     protected $_ignore_uri = 'https:
-    public function create(array $params)
-    {
-        throw new Services_Contactually_Exception_NotImplemented("This method is not implemented");
-    }
     public function bucket($contact_id, $bucket_id)
     {
         $this->bucket = str_replace('<id>', $contact_id, $this->_bucket_uri);

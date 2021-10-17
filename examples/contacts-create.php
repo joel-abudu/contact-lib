@@ -4,8 +4,9 @@ include_once '../Services/Contactually.php';
 $client = new Services_Contactually(array('apikey' => $apiKey));
 $contact = new Services_Contactually_Contact($client);
 $params = array(
-    'first_name' => 'aaFirstName',
-    'last_name' => 'astName',
+    'first_name' => 'Bruce',
+    'last_name' => 'Wayne',
+    'email' => 'definitely.not.batman@example.com',
     'title' => 'Sir',
     'company' => 'Wayne Enterprises',
     'visible' => 1,
@@ -15,4 +16,4 @@ $params = array(
     'user_bucket_id' => '53000',
     );
 $result = $contact->create($params);
-print_r($result);
+print_r($client);
