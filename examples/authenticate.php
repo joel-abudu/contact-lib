@@ -5,6 +5,7 @@ $client = new Services_Contactually(
             array('email' => $email, 'password' => $password)
         );
 echo $client->response_code;
+echo "\n";
 unset($client);
 $client = new Services_Contactually(array('apikey' => $apiKey));
 echo $client->response_code;
