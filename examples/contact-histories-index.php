@@ -2,9 +2,18 @@
 include_once '../creds.php';
 include_once '../Services/Contactually.php';
 $client = new Services_Contactually(array('apikey' => $apiKey));
-$contact_histories = $client->contact_histories->index();
-echo "\nDisplaying {$contact_histories->count} records:\n";
+$contact_histories = $client->contact_histories->index($page = 1, $limit = 10);
+echo "\nDisplaying {$contact_histories->count} records per page:\n";
+echo "\nPage: " . $contact_histories->page . ' of ' . $contact_histories->getPageCount() . "\n";
 foreach($contact_histories as $contact_history) {
     echo $contact_history->email . "\n";
     echo $contact_history->subject . "\n";
+}
+while ($contact_histories->hasMorePages()) {
+    $itempage = $contact_histories->getNextPage();
+    echo "\n\nPage: " . $contact_histories->page . ' of ' . $contact_histories->getPageCount() . "\n";
+    foreach($itempage as $contact_history) {
+        echo $contact_history->email . "\n";
+        echo $contact_history->subject . "\n";
+    }
 }
