@@ -12,6 +12,7 @@ spl_autoload_register('Services_Contactually_autoload');
 class Services_Contactually extends Services_Contactually_Resources_Base
 {
     const USER_AGENT = 'contactually-php/0.8.0';
+    protected $_baseUri = 'https:
     protected $_successCodes = array(200 => 'OK', 201 => 'Created', 202 => 'Accepted');
     public $response_body = null;
     public $response_code = null;
@@ -106,5 +107,9 @@ curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
         $this->response_code = curl_getinfo($connection, CURLINFO_HTTP_CODE);
         $this->response_obj  = json_decode($this->response_json);
         curl_close($connection);
+    }
+    public function getUri()
+    {
+        return $this->_baseUri;
     }
 }

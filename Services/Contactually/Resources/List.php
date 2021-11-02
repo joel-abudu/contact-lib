@@ -17,7 +17,7 @@ abstract class Services_Contactually_Resources_List
         $this->page = max($page, 1);
         $this->limit = min($limit, 100);
         $params = array('page' => $this->page, 'limit' => $this->limit);
-        $this->client->get($this->_index_uri, $params);
+        $this->client->get($this->client->getUri() . $this->_index_uri, $params);
         $object = $this->client->response_obj;
         $this->_obj  = $object->{$this->_data};
         $this->count = $object->count;

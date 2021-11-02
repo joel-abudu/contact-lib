@@ -2,10 +2,10 @@
 class Services_Contactually_Contacts extends Services_Contactually_Resources_List
     implements Services_Contactually_Interfaces_Index
 {
-    protected $_index_uri = 'https:
-    protected $_search_uri = 'https:
     protected $_data = 'contacts';
     protected $_class = 'Services_Contactually_Contact';
+    protected $_index_uri  = 'contacts.json';
+    protected $_search_uri = 'contacts/search.json';
     public function search($term, $page = 1, $limit = 100)
     {
         $this->term = $term;
