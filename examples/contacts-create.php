@@ -1,7 +1,7 @@
 <?php
 include_once '../creds.php';
 include_once '../Services/Contactually.php';
-$client = new Services_Contactually(array('apikey' => $apiKey));
+$client = new Services_Contactually(array('api_key' => $apiKey));
 $contact = new Services_Contactually_Contact($client);
 $params = array(
     'first_name' => 'Bruce',

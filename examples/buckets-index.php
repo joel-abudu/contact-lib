@@ -1,7 +1,7 @@
 <?php
 include_once '../creds.php';
 include_once '../Services/Contactually.php';
-$client = new Services_Contactually(array('apikey' => $apiKey));
+$client = new Services_Contactually(array('api_key' => $apiKey));
 $buckets = $client->buckets->index();
 echo "\nDisplaying {$buckets->count} records per page:\n";
 echo "\nPage: " . $buckets->page . ' of ' . $buckets->getPageCount() . "\n";

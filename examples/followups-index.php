@@ -1,7 +1,7 @@
 <?php
 include_once '../creds.php';
 include_once '../Services/Contactually.php';
-$client = new Services_Contactually(array('apikey' => $apiKey));
+$client = new Services_Contactually(array('api_key' => $apiKey));
 $followups = $client->followups->index($page = 1, $limit = 10);
 echo "\nDisplaying {$followups->count} records per page:\n";
 echo "\nPage: " . $followups->page . ' of ' . $followups->getPageCount() . "\n";
