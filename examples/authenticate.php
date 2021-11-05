@@ -7,5 +7,8 @@ $client = new Services_Contactually(
 echo $client->response_code;
 echo "\n";
 unset($client);
-$client = new Services_Contactually(array('apikey' => $apiKey));
-echo $client->response_code;
+$client = new Services_Contactually(array('api_key' => $apiKey));
+$buckets = $client->buckets->index();
+foreach($buckets as $bucket) {
+    echo $bucket->name . "\n";
+}

@@ -14,6 +14,7 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     const USER_AGENT = 'contactually-php/0.8.0';
     protected $_baseUri = 'https:
     protected $_successCodes = array(200 => 'OK', 201 => 'Created', 202 => 'Accepted');
+    protected $_api_key = null;
     public $response_body = null;
     public $response_code = null;
     public $response_json = null;
@@ -30,17 +31,19 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     public function __construct($params)
     {
         $this->cookie_path = getcwd() . '/cookie.txt';
-        if (isset($params['apikey'])) {
+        if (isset($params['api_key'])) {
+            $this->_api_key = $params['api_key'];
         } elseif (isset($params['email']) && isset($params['password'])) {
             foreach($params as $param => $value) {
                 unset($params[$param]);
                 $params["user[$param]"] = $value;
             }
+            return $this->_authenticate($params);
         } else {
             throw new Services_Contactually_Exceptions_Authentication(
                     "To authenticate, you must include either an API Key or an email and password");
         }
-        $this->_authenticate($params);
+        return false;
     }
     public function __get($name)
     {
@@ -53,16 +56,18 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     }
     protected function _authenticate($params)
     {
-        $auth_url = 'https:
+        $auth_url = $this->_baseUri . 'users/sign_in.json';
         $this->post($auth_url, $params);
         if (!isset($this->_successCodes[$this->response_code])) {
-            throw new Services_Contactually_Exceptions_Authentication(
-                    "Authentication failed");
+            return false;
         }
         return true;
     }
     public function get($uri, $params = array())
     {
+        if (!is_null($this->_api_key)) {
+            $params['api_key'] = $this->_api_key;
+        }
         $uri .= (count($params)) ? '?'.http_build_query($params) : '';
         $curl_opts = array(
             CURLOPT_RETURNTRANSFER => true,
@@ -73,6 +78,9 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     }
     public function delete($uri, $params = array())
     {
+        if (!is_null($this->_api_key)) {
+            $params['api_key'] = $this->_api_key;
+        }
         $curl_opts = array(
             CURLOPT_CUSTOMREQUEST => 'DELETE',
             CURLOPT_RETURNTRANSFER => true,
@@ -86,6 +94,9 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     }
     public function post($uri, $params = array())
     {
+        if (!is_null($this->_api_key)) {
+            $params['api_key'] = $this->_api_key;
+        }
         $curl_opts = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => $uri,
