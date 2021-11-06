@@ -21,7 +21,8 @@ abstract class Services_Contactually_Resources_List
         $object = $this->client->response_obj;
         $this->_obj  = $object->{$this->_data};
         $this->count = $object->count;
-        $this->_total = $object->total_count;
+        $this->_total = isset($object->total_count) ?
+                $object->total_count : $object->count;
         $this->_page_count = ceil($this->_total / $this->limit);
         return $this;
     }
