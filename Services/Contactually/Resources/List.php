@@ -2,7 +2,7 @@
 abstract class Services_Contactually_Resources_List
     implements Iterator
 {
-    protected $client = null;
+    protected $_client = null;
     protected $_index = 0;
     protected $_total = 1;
     protected $_page_count = 1;
@@ -10,15 +10,15 @@ abstract class Services_Contactually_Resources_List
     public $limit = 100;
     public function __construct(Services_Contactually $client)
     {
-        $this->client = $client;
+        $this->_client = $client;
     }
     public function index($page = 1, $limit = 100)
     {
         $this->page = max($page, 1);
         $this->limit = min($limit, 100);
         $params = array('page' => $this->page, 'limit' => $this->limit);
-        $this->client->get($this->client->getUri() . $this->_index_uri, $params);
-        $object = $this->client->response_obj;
+        $this->_client->get($this->_client->getUri() . $this->_index_uri, $params);
+        $object = $this->_client->response_obj;
         $this->_obj  = $object->{$this->_data};
         $this->count = $object->count;
         $this->_total = isset($object->total_count) ?
@@ -68,7 +68,7 @@ abstract class Services_Contactually_Resources_List
         if (isset($this->_obj[$index])) {
             $params = $this->_obj[$index];
         }
-        $item = new $this->_class($this->client);
+        $item = new $this->_class($this->_client);
         return $item->bind($params);
     }
     public function rewind()

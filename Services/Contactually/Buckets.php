@@ -9,8 +9,8 @@ class Services_Contactually_Buckets extends Services_Contactually_Resources_List
     public function __call($name, $params)
     {
         if ('list' == $name) {
-            $this->client->get($this->client->getUri() . $this->_list_uri);
-            $object = $this->client->response_obj;
+            $this->_client->get($this->_client->getUri() . $this->_list_uri);
+            $object = $this->_client->response_obj;
             $this->_obj  = $object->bucket_sets;
             $this->count = $object->count;
             $this->_total = $object->count;

@@ -1,10 +1,10 @@
 <?php
 abstract class Services_Contactually_Resources_Base
 {
-    protected $client = null;
+    protected $_client = null;
     public function __construct(Services_Contactually $client)
     {
-        $this->client = $client;
+        $this->_client = $client;
     }
     public function bind($properties)
     {
@@ -16,8 +16,8 @@ abstract class Services_Contactually_Resources_Base
     public function show($id = 0)
     {
         $this->show = str_replace('<id>', $id, $this->_show_uri);
-        $this->client->get($this->client->getUri() . $this->show, array('id' => $id));
-        return $this->bind($this->client->response_obj);
+        $this->_client->get($this->_client->getUri() . $this->show, array('id' => $id));
+        return $this->bind($this->_client->response_obj);
     }
     public function create(array $params)
     {
@@ -25,14 +25,14 @@ abstract class Services_Contactually_Resources_Base
         foreach($params as $key => $value) {
             $properties[$this->_resource . "[$key]"] = $value;
         }
-        $this->client->post($this->client->getUri() . $this->_create_uri, $properties);
+        $this->_client->post($this->_client->getUri() . $this->_create_uri, $properties);
         $successCodes = array(200, 201);
-        return (in_array($this->client->response_code, $successCodes)) ? true : false;
+        return (in_array($this->_client->response_code, $successCodes)) ? true : false;
     }
     public function delete($id = 0)
     {
         $this->delete = str_replace('<id>', $id, $this->_delete_uri);
-        $this->client->delete($this->client->getUri() . $this->delete, array('id' => $id));
-        return (200 == $this->client->response_code) ? true : false;
+        $this->_client->delete($this->_client->getUri() . $this->delete, array('id' => $id));
+        return (200 == $this->_client->response_code) ? true : false;
     }
 }

@@ -23,14 +23,14 @@ class Services_Contactually_Contact extends Services_Contactually_Resources_Base
     {
         $this->bucket = str_replace('<id>', $contact_id, $this->_bucket_uri);
         $params = array('id' => $contact_id, 'bucket_id' => $bucket_id);
-        $this->client->post($this->client->getUri() . $this->bucket, $params);
-        return (200 == $this->client->status) ? true : false;
+        $this->_client->post($this->_client->getUri() . $this->bucket, $params);
+        return (200 == $this->_client->status) ? true : false;
     }
     public function ignore($contact_id, $temporary = true, $task_id = 0)
     {
         $this->ignore = str_replace('<id>', $contact_id, $this->_ignore_uri);
         $params = array('id' => $contact_id, 'temp' => !$temporary, 'task_id' => $task_id);
-        $this->client->post($this->client->getUri() . $this->ignore, $params);
-        return (200 == $this->client->status) ? true : false;
+        $this->_client->post($this->_client->getUri() . $this->ignore, $params);
+        return (200 == $this->_client->status) ? true : false;
     }
 }

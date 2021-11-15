@@ -12,9 +12,9 @@ class Services_Contactually_Contacts extends Services_Contactually_Resources_Lis
         $this->page = max($page, 1);
         $this->limit = min($limit, 100);
         $params = array('term' => $this->term, 'page' => $this->page, 'limit' => $this->limit);
-        $this->client->get($this->_search_uri, $params);
-        $object = $this->client->response_obj;
-        $this->_json = $this->client->response_json;
+        $this->_client->get($this->_search_uri, $params);
+        $object = $this->_client->response_obj;
+        $this->_json = $this->_client->response_json;
         $this->_obj  = $object->{$this->_data};
         $this->count = $object->count;
         $this->_total = $object->total_count;
