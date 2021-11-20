@@ -16,4 +16,4 @@ $params = array(
     'user_bucket_id' => '53000',
     );
 $result = $contact->create($params);
-print_r($client);
+print_r($result);
