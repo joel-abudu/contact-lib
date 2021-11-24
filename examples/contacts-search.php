@@ -2,7 +2,7 @@
 include_once '../creds.php';
 include_once '../Services/Contactually.php';
 $client = new Services_Contactually(array('api_key' => $apiKey));
-$contacts = $client->contacts->search('michelle', $page = 1, $limit = 20);
+$contacts = $client->contacts->search('wayne', $page = 1, $limit = 20);
 echo "\nDisplaying {$contacts->count} records per page:\n";
 echo "\nPage: " . $contacts->page . ' of ' . $contacts->getPageCount() . "\n";
 foreach($contacts as $contact) {

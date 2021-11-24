@@ -111,7 +111,7 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     protected function _execute($curl_params = array())
     {
         $connection = curl_init();
-        curl_setopt($connection, CURLOPT_USERAGENT, self::USER_AGENT);
+        $curl_params[CURLOPT_USERAGENT] = self::USER_AGENT;
         foreach($curl_params as $option => $value) {
             curl_setopt($connection, $option, $value);
         }
