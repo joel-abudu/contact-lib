@@ -18,16 +18,6 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     public $response_obj  = null;
     public $response_code = null;
     public $response_json = null;
-    protected $resources = array(
-                    'accounts' => 'Accounts',
-                    'buckets' => 'Buckets',
-                    'contact_histories' => 'ContactHistories',
-                    'contacts' => 'Contacts',
-                    'followups' => 'Followups',
-                    'notes' => 'Notes',
-                    'tasks' => 'Tasks',
-                    'users' => 'Users'
-                );
     public function __construct($params)
     {
         $this->cookie_path = getcwd() . '/cookie.txt';
