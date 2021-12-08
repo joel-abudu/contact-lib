@@ -18,6 +18,16 @@ class Services_Contactually extends Services_Contactually_Resources_Base
     public $response_obj  = null;
     public $response_code = null;
     public $response_json = null;
+    protected $resources = array(
+                    'accounts' => 'Accounts',
+                    'buckets' => 'Buckets',
+                    'contact_histories' => 'ContactHistories',
+                    'contacts' => 'Contacts',
+                    'followups' => 'Followups',
+                    'notes' => 'Notes',
+                    'tasks' => 'Tasks',
+                    'users' => 'Users'
+                );
     public function __construct($params)
     {
         $this->cookie_path = getcwd() . '/cookie.txt';
@@ -107,23 +117,23 @@ class Services_Contactually extends Services_Contactually_Resources_Base
         }
 curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
         $response = curl_exec($connection);
+        $headers = explode("\r\n\r\n", $response);
         $this->response_code = curl_getinfo($connection, CURLINFO_HTTP_CODE);
         switch($this->response_code)
         {
             case '201':
-                $headers = explode("\r\n\r\n", $response);
                 preg_match("/Location:\s\S+/", $headers[1], $matches);
                 $location = substr($matches[0], strpos($matches[0], 'http'));
                 $response = '{"location": "' . $location . '", "status": "201"}';
                 break;
             case '406':
-                $headers = explode("\r\n\r\n", $response);
                 $tmp_object = json_decode($headers[2]);
                 $response = '{"error": "' . $tmp_object->error . '", "status": "406"}';
             default:
         }
-        $this->response_json = $response;
-        $this->response_obj  = json_decode($this->response_json);
+        $this->response_headers = $headers;
+        $this->response_json    = $response;
+        $this->response_obj     = json_decode($this->response_json);
         curl_close($connection);
     }
     public function getUri()
