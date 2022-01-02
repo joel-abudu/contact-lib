@@ -1,6 +1,7 @@
 <?php
 namespace Contactually;
 use Guzzle\Http;
+use Contactually\Exceptions\InvalidResourceException;
 class Client
 {
     const USER_AGENT = 'contactually-php/0.9.0';
@@ -36,5 +37,14 @@ class Client
     }
     public function delete($url)
     {
+    }
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'accounts':
+                return new \Contactually\Accounts($this);
+            default:
+                throw new \Contactually\Exceptions\InvalidResourceException('Not supported');
+        }
     }
 }
