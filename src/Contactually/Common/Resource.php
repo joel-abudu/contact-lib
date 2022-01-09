@@ -1,6 +1,6 @@
 <?php
-namespace Contactually;
-class Accounts implements \Iterator
+namespace Contactually\Common;
+abstract class Resource implements \Iterator
 {
     protected $index = 0;
     protected $data = array();
@@ -10,8 +10,8 @@ class Accounts implements \Iterator
     }
     public function index()
     {
-        $results = $this->client->get('accounts.json');
-        $this->data = $results['accounts'];
+        $results = $this->client->get($this->resource . '.json');
+        $this->data = $results[$this->resource];
         return $this;
     }
     public function rewind()
