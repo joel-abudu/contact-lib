@@ -1,7 +1,6 @@
 <?php
 include_once '../creds.php';
-include_once '../Services/Contactually.php';
-$client = new Services_Contactually(array('api_key' => $apiKey));
-$account = new Services_Contactually_Account($client);
-$result = $account->show(18400);
-print_r($result);
+include_once '../vendor/autoload.php';
+$client = new \Contactually\Client($apikey);
+$account = $client->accounts->show(105747);
+print_r($account);
