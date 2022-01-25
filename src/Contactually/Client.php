@@ -49,6 +49,8 @@ class Client
                 return new \Contactually\ContactHistories($this);
             case 'email_aliases':
                 return new \Contactually\EmailAliases($this);
+            case 'email_templates':
+                return new \Contactually\EmailTemplates($this);
             default:
                 throw new \Contactually\Exceptions\InvalidResourceException('Not supported');
         }
