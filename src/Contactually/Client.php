@@ -51,6 +51,14 @@ class Client
                 return new \Contactually\EmailAliases($this);
             case 'email_templates':
                 return new \Contactually\EmailTemplates($this);
+            case 'followups':
+                return new \Contactually\Followups($this);
+            case 'groupings':
+                return new \Contactually\Groupings($this);
+            case 'notes':
+                return new \Contactually\Notes($this);
+            case 'tasks':
+                return new \Contactually\Tasks($this);
             default:
                 throw new \Contactually\Exceptions\InvalidResourceException('Not supported');
         }

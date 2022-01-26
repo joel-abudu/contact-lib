@@ -1,17 +1,8 @@
 <?php
 include_once '../creds.php';
-include_once '../Services/Contactually.php';
-$client = new Services_Contactually(array('api_key' => $apiKey));
-$followups = $client->followups->index($page = 1, $limit = 10);
-echo "\nDisplaying {$followups->count} records per page:\n";
-echo "\nPage: " . $followups->page . ' of ' . $followups->getPageCount() . "\n";
+include_once '../vendor/autoload.php';
+$client = new \Contactually\Client($apikey);
+$followups = $client->followups->index();
 foreach($followups as $followup) {
-    echo $followup->title . " " . $followup->due_date . "\n";
-}
-while ($followups->hasMorePages()) {
-    $itempage = $followups->getNextPage();
-    echo "\nPage: " . $followups->page . ' of ' . $followups->getPageCount() . "\n";
-    foreach($itempage as $followup) {
-        echo $followup->title . " " . $followup->due_date . "\n";
-    }
+    print_r($followup);
 }
