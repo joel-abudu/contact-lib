@@ -27,7 +27,8 @@ class Client
         }
         $this->response = $request->send();
         $this->statusCode = $this->response->getStatusCode();
-        return $this->response->json();
+        $this->detail = $this->response->json();
+        return $this->detail;
     }
     public function put($url, $params = array())
     {
