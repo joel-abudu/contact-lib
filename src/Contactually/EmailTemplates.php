@@ -8,4 +8,8 @@ class EmailTemplates extends \Contactually\Common\Resource
     {
         throw new \Contactually\Exceptions\MethodNotImplemented;
     }
+    public function delete($id)
+    {
+        throw new \Contactually\Exceptions\MethodNotImplemented;
+    }
 }
