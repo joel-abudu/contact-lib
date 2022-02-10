@@ -51,8 +51,7 @@ class Client
         $fullclass = "Contactually\\" . str_replace(' ', '', $classname);
         if (class_exists($fullclass)) {
             return new $fullclass($this);
-        } else {
-            throw new \Contactually\Exceptions\InvalidResourceException('Not supported');
         }
+        throw new \Contactually\Exceptions\InvalidResourceException('Not supported');
     }
 }
