@@ -9,4 +9,10 @@ class Groupings extends \Contactually\Common\Resource
         $results = $this->client->get($this->resource . '/' . $id . '/statistics.json');
         return json_decode(json_encode($results));
     }
+    public function minimal_index()
+    {
+        $results = $this->client->get($this->resource . '/minimal_index.json');
+        $this->data = $results[$this->dataname];
+        return $this;
+    }
 }
