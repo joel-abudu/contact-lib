@@ -35,6 +35,14 @@ class Client
     }
     public function post($uri, $params = array())
     {
+        $request = $this->client->post($uri, array(), '', array('exceptions' => false));
+        foreach($params as $key => $value) {
+            $request->setPostField($key, $value);
+        }
+        $this->response = $request->send();
+        $this->statusCode = $this->response->getStatusCode();
+        $this->detail = $this->response->json();
+        return $this->response->isSuccessful();
     }
     public function delete($uri)
     {
