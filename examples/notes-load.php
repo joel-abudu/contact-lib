@@ -2,5 +2,5 @@
 include_once '../creds.php';
 include_once '../vendor/autoload.php';
 $client = new \Contactually\Client($apikey);
-$account = $client->accounts->show(105747);
-print_r($account);
+$note = $client->notes->load(6611603);
+print_r($note);
