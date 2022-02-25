@@ -1,6 +1,6 @@
 <?php
 namespace Contactually;
-class Contacts extends \Contactually\Common\Resource
+class Contacts extends \Contactually\Resources\Base
 {
     protected $resource = 'contacts';
     protected $dataname = 'contacts';

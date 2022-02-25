@@ -1,5 +1,5 @@
 <?php
-namespace Contactually\Common;
+namespace Contactually\Resources;
 abstract class Resource implements \Iterator
 {
     protected $index = 0;
@@ -18,6 +18,12 @@ abstract class Resource implements \Iterator
     {
         $results = $this->client->get($this->resource . '/' . $id . '.json');
         return json_decode(json_encode($results));
+    }
+    public function bind($hash)
+    {
+        foreach ($hash as $key => $value) {
+            $this->$key = $value;
+        }
     }
     public function delete($id)
     {
