@@ -1,6 +1,6 @@
 <?php
 namespace Contactually\Resources;
-abstract class Resource implements \Iterator
+abstract class Base implements \Iterator
 {
     protected $index = 0;
     protected $data = array();
@@ -17,7 +17,8 @@ abstract class Resource implements \Iterator
     public function load($id)
     {
         $results = $this->client->get($this->resource . '/' . $id . '.json');
-        return json_decode(json_encode($results));
+        $this->bind($results);
+        return $this;
     }
     public function bind($hash)
     {
