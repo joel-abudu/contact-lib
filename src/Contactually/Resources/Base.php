@@ -36,7 +36,8 @@ abstract class Base implements \Iterator
     }
     public function current()
     {
-        return json_decode(json_encode($this->data[$this->index]));
+        $this->bind($this->data[$this->index]);
+        return $this;
     }
     public function key()
     {
