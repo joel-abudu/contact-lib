@@ -13,6 +13,7 @@ class Contacts extends \Contactually\Resources\Base
     public function statistics($id)
     {
         $results = $this->client->get($this->resource . '/' . $id . '/statistics.json');
-        return json_decode(json_encode($results));
+        $this->bind($results);
+        return $this;
     }
 }

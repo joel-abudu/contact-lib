@@ -1,7 +1,6 @@
 <?php
 include_once '../creds.php';
-include_once '../Services/Contactually.php';
-$client = new Services_Contactually(array('api_key' => $apiKey));
-$user = new Services_Contactually_User($client);
-$result = $user->current();
+include_once '../vendor/autoload.php';
+$client = new \Contactually\Client($apikey);
+$result = $client->users->current();
 print_r($result);
