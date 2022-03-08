@@ -36,6 +36,7 @@ class Client
     public function post($uri, $params = array())
     {
         $request = $this->client->post($uri, array(), '', array('exceptions' => false));
+        $params['api_key'] = $this->apikey;
         foreach($params as $key => $value) {
             $request->setPostField($key, $value);
         }
