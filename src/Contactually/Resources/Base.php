@@ -20,6 +20,12 @@ abstract class Base implements \Iterator
         $this->bind($results);
         return $this;
     }
+    public function create(array $params)
+    {
+    }
+    public function update($id, $params)
+    {
+    }
     public function bind($hash)
     {
         foreach ($hash as $key => $value) {
