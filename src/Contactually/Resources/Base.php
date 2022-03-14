@@ -63,4 +63,8 @@ print_r($properties);
     {
         return isset($this->data[$this->index]);
     }
+    public function count()
+    {
+        return count($this->data);
+    }
 }
