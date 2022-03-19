@@ -22,10 +22,8 @@ abstract class Base implements \Iterator
     }
     public function create(array $params)
     {
-print_r($params);
         $properties = array();
         $properties['contacts'] = $params;
-print_r($properties);
         $results = $this->client->post($this->resource . '.json', $properties);
         print_r($this->client); die();
     }
