@@ -4,6 +4,7 @@ class Contacts extends \Contactually\Resources\Base
 {
     protected $resource = 'contacts';
     protected $dataname = 'contacts';
+    protected $postname = 'contact';
     public function search($term, $parameters = array())
     {
         $parameters['term'] = $term;
