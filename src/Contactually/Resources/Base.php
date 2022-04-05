@@ -29,6 +29,10 @@ abstract class Base implements \Iterator
     }
     public function update($id, $params)
     {
+        $properties = array();
+        $properties[$this->postname] = $params;
+        $results = $this->client->put($this->resource . '/' . $id . '.json', $properties);
+        return $results;
     }
     public function bind($hash)
     {
