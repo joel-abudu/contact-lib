@@ -20,11 +20,9 @@ class Client
     }
     public function get($uri, $params = array())
     {
-        $params['api_key'] = $this->apikey;
         $request = $this->client->get($uri, array(), array('exceptions' => false));
-        foreach($params as $key => $value) {
-            $request->getQuery()->set($key, $value);
-        }
+        $params['api_key'] = $this->apikey;
+        $request = $this->addFields($request, $params);
         $this->response = $request->send();
         $this->statusCode = $this->response->getStatusCode();
         $this->detail = $this->response->json();
@@ -34,9 +32,7 @@ class Client
     {
         $request = $this->client->put($uri, array(), '', array('exceptions' => false));
         $params['api_key'] = $this->apikey;
-        foreach($params as $key => $value) {
-            $request->setPostField($key, $value);
-        }
+        $request = $this->addFields($request, $params);
         $this->response = $request->send();
         $this->statusCode = $this->response->getStatusCode();
         $this->detail = $this->response->json();
@@ -46,9 +42,7 @@ class Client
     {
         $request = $this->client->post($uri, array(), '', array('exceptions' => false));
         $params['api_key'] = $this->apikey;
-        foreach($params as $key => $value) {
-            $request->setPostField($key, $value);
-        }
+        $request = $this->addFields($request, $params);
         $this->response = $request->send();
         $this->statusCode = $this->response->getStatusCode();
         $this->detail = $this->response->json();
@@ -62,6 +56,13 @@ class Client
         $this->statusCode = $this->response->getStatusCode();
         $this->detail = $this->response->json();
         return $this->response->isSuccessful();
+    }
+    protected function addFields($request, array $params)
+    {
+        foreach($params as $key => $value) {
+            $request->getQuery()->set($key, $value);
+        }
+        return $request;
     }
     public function __get($name)
     {
