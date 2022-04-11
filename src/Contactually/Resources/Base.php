@@ -12,6 +12,7 @@ abstract class Base implements \Iterator
     {
         $results = $this->client->get($this->resource . '.json', $parameters);
         $this->data = $results[$this->dataname];
+        $this->count = $results['count'];
         return $this;
     }
     public function load($id)
