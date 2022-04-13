@@ -17,4 +17,15 @@ class Contacts extends \Contactually\Resources\Base
         $this->bind($results);
         return $this;
     }
+    public function bucket($bucket_id)
+    {
+        $parameters = array('grouping_id' => $bucket_id);
+        $results = $this->client->post($this->resource . '/' . $this->id . '/groupings.json', $parameters);
+        return $results;
+    }
+    public function unbucket($bucket_id)
+    {
+        $results = $this->client->delete($this->resource . '/' . $this->id . '/groupings/' . $bucket_id . '.json');
+        return $results;
+    }
 }
