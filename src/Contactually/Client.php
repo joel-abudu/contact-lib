@@ -4,7 +4,7 @@ use Guzzle\Http;
 use Contactually\Exceptions\InvalidResourceException;
 class Client
 {
-    const USER_AGENT = 'contactually-php/1.0.1';
+    const USER_AGENT = 'contactually-php/1.1.0';
     protected $baseURI  = 'https:
     protected $apikey   = '';
     protected $client   = null;
