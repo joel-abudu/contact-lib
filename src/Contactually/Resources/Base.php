@@ -4,6 +4,7 @@ abstract class Base implements \Iterator
 {
     protected $index = 0;
     protected $data = array();
+    public $id = 0;
     public function __construct(\Contactually\Client $client)
     {
         $this->client = $client;
@@ -26,6 +27,7 @@ abstract class Base implements \Iterator
         $properties = array();
         $properties[$this->postname] = $params;
         $results = $this->client->post($this->resource . '.json', $properties);
+        $this->id = $this->client->detail['id'];
         return $results;
     }
     public function update($id, $params)

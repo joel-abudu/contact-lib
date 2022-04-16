@@ -8,8 +8,10 @@ class Contacts extends \Contactually\Resources\Base
     public function search($term, $parameters = array())
     {
         $parameters['term'] = $term;
-        $this->resource = 'contacts/search';
-        return parent::index($parameters);
+        $results = $this->client->get($this->resource . '/search.json', $parameters);
+        $this->data = $results[$this->dataname];
+        $this->count = $results['count'];
+        return $this;
     }
     public function statistics($id)
     {
