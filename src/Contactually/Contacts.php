@@ -30,4 +30,10 @@ class Contacts extends \Contactually\Resources\Base
         $results = $this->client->delete($this->resource . '/' . $this->id . '/groupings/' . $bucket_id . '.json');
         return $results;
     }
+    public function tag(array $tags)
+    {
+        $parameters['tags'] = implode(',', $tags);
+        $results = $this->client->post($this->resource . '/' . $this->id . '/tags.json', $parameters);
+        return $results;
+    }
 }
