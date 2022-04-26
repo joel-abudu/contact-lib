@@ -37,7 +37,7 @@ abstract class Base implements \Iterator
         $results = $this->client->put($this->resource . '/' . $id . '.json', $properties);
         return $results;
     }
-    public function bind($hash)
+    protected function bind($hash)
     {
         foreach ($hash as $key => $value) {
             $this->$key = $value;
