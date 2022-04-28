@@ -36,4 +36,7 @@ class Contacts extends \Contactually\Resources\Base
         $results = $this->client->post($this->resource . '/' . $this->id . '/tags.json', $parameters);
         return $results;
     }
+    public function create_multiple() { }
+    public function merge() { }
+    public function snooze() { }
 }
